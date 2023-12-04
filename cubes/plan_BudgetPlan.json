@@ -41,7 +41,6 @@
 	"Views@Code.links":
 	[
 		"plan_BudgetPlan.views/Big.json",
-		"plan_BudgetPlan.views/budget_placeholder.json",
 		"plan_BudgetPlan.views/Budget Input Detailed.json",
 		"plan_BudgetPlan.views/Budget Input Total.json",
 		"plan_BudgetPlan.views/Budget Line Input.json",
