@@ -41,7 +41,6 @@
 	"Views@Code.links":
 	[
 		"plan_BudgetPlan.views/Big.json",
-		"plan_BudgetPlan.views/budget_placeholder.json",
 		"plan_BudgetPlan.views/Budget Input Detailed.json",
 		"plan_BudgetPlan.views/Budget Input Total.json",
 		"plan_BudgetPlan.views/Budget Line Input.json",
@@ -53,7 +52,6 @@
 		"plan_BudgetPlan.views/goal_input_nlevel.json",
 		"plan_BudgetPlan.views/Goal By Detailed Chart Of Account.json",
 		"plan_BudgetPlan.views/Goal FY 2004 Budget.json",
-		"plan_BudgetPlan.views/Goal Input.json",
 		"plan_BudgetPlan.views/High Level Profit And Loss.json",
 		"plan_BudgetPlan.views/mover.json",
 		"plan_BudgetPlan.views/plan_budget_input.json",
