@@ -1,0 +1,37 @@
+{
+	"@type":"Process",
+	"Name":"Process_TI_Folder_Files_Export_Leaf_Data_MDX.",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"Process_TI_Folder_Files_Export_Leaf_Data_MDX..ti",
+	"DataSource":
+	{
+		"Type":"TM1CubeView",
+		"dataSourceNameForServer":"plan_BudgetPlan",
+		"dataSourceNameForClient":"plan_BudgetPlan",
+		"view":""
+	},
+	"Parameters":
+	[
+		{
+			"Name":"pCube",
+			"Prompt":"",
+			"Value":"plan_BudgetPlan",
+			"Type":"String"
+		},
+		{
+			"Name":"pExportDir",
+			"Prompt":"",
+			"Value":"Exports",
+			"Type":"String"
+		},
+		{
+			"Name":"pExportFile",
+			"Prompt":"",
+			"Value":"plan_BudgetPlan_mdx.csv",
+			"Type":"String"
+		}
+	],
+	"Variables":[],
+	"UIData": "_ParameterConstraints=e30=\f",
+	"VariablesUIData": []
+}
