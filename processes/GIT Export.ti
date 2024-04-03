@@ -1,0 +1,56 @@
+#region Prolog
+vAttributeExportFile = '';
+vDataExportFile      = '';
+IF ( pVersion = 11 & pOS @= 'WIN' );
+    ExecuteCommand( 'cmd /c mkdir "GIT"', 1);
+    ExecuteCommand( 'cmd /c mkdir "GIT\Attributes"', 1);
+    ExecuteCommand( 'cmd /c mkdir "GIT\Cubes"', 1);
+    vAttributeExportFile = '.\GIT\Attributes\';
+    vDataExportFile      = '.\GIT\Cubes\';
+ELSEIF ( pVersion = 11 & pOS @= 'LINUX' );
+    ExecuteCommand( 'mkdir "GIT"', 1);
+    ExecuteCommand( 'mkdir "GIT/Attributes"', 1);
+    ExecuteCommand( 'mkdir "GIT/Cubes"', 1);
+    vAttributeExportFile = './GIT/Attributes/';
+    vDataExportFile      = './GIT/Cubes/';
+ELSEIF ( pVersion = 12);
+    IF ( pAttributes @= 'Y' );
+        vAttributeExportFile = '/GIT/Attributes/';
+    ENDIF;
+    IF ( pData @= 'Y' );
+        vDataExportFile      = '/GIT/Cubes/';
+    ENDIF;
+ELSE;
+    PROCESSQUIT;
+ENDIF;
+
+
+IF ( pAttributes @= 'Y' );
+    vIndex = 1;
+    vDim   = DIMNM('}Dimensions', vIndex);
+    WHILE ( vDim @<> '' );
+        IF ( SCAN ( '}', vDim ) <> 1 & SCAN ( ':', vDim ) = 0);
+            vAttributesCube = '}ElementAttributes_' | vDim;
+            IF ( CubeExists(vAttributesCube) = 1 & ElementCount (vAttributesCube, vAttributesCube ) > 0 );
+            #AsciiOutput( vAttributeExportFile | 'log.txt', vDim );
+                ExecuteProcess('GIT Export Attributes', 'pDimension', vDim, 'pDir', vAttributeExportFile );
+            ENDIF;
+        ENDIF;
+        vIndex = vIndex + 1;
+        vDim   = DIMNM( '}Dimensions', vIndex );
+    END;
+ENDIF;
+
+IF ( pData @= 'Y' );
+    vIndex = 1;
+    vCube  = DIMNM('}Cubes', vIndex);
+    WHILE ( vCube @<> '' );
+        IF ( SCAN ( '}', vCube ) <> 1 & CubeExists( vCube ) = 1 );
+            #AsciiOutput( vDataExportFile | 'log.txt', vCube );
+            ExecuteProcess('GIT Export Data', 'pCube', vCube, 'pDir', vDataExportFile );
+        ENDIF;
+        vIndex = vIndex + 1;
+        vCube   = DIMNM( '}Cubes', vIndex );
+    END;
+ENDIF;
+#endregion
