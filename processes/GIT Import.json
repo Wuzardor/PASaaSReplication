@@ -1,0 +1,38 @@
+{
+	"@type":"Process",
+	"Name":"GIT Import",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"GIT Import.ti",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":
+	[
+		{
+			"Name":"pVersion",
+			"Prompt":"",
+			"Value":12,
+			"Type":"Numeric"
+		},
+		{
+			"Name":"pOS",
+			"Prompt":"",
+			"Value":"AWS",
+			"Type":"String"
+		},
+		{
+			"Name":"pAttributes",
+			"Prompt":"",
+			"Value":"Y",
+			"Type":"String"
+		},
+		{
+			"Name":"pData",
+			"Prompt":"",
+			"Value":"N",
+			"Type":"String"
+		}
+	],
+	"Variables":[]
+}

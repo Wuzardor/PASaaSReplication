@@ -1,0 +1,14 @@
+{
+	"@type":"Process",
+	"Name":"Test_Process_Errors",
+	"HasSecurityAccess":false,
+	"Code@Code.link":"Test_Process_Errors.ti",
+	"DataSource":
+	{
+		"Type":"None"
+	},
+	"Parameters":[],
+	"Variables":[],
+	"UIData": "_ParameterConstraints=e30=\f",
+	"VariablesUIData": []
+}

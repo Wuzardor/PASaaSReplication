@@ -52,7 +52,5 @@
 			"Type":"String"
 		}
 	],
-	"Variables":[],
-	"VariablesUIData": [],
-	"UIData": "_ParameterConstraints=e30=\f"
+	"Variables":[]
 }

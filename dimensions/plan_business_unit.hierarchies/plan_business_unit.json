@@ -42,6 +42,10 @@
 		{
 			"Name":"10225",
 			"Type":"Numeric"
+		},
+		{
+			"Name":"10500",
+			"Type":"Numeric"
 		}
 	],
 	"Edges":
@@ -64,6 +68,11 @@
 		{
 			"ParentName":"10000",
 			"ComponentName":"10400",
+			"Weight":1
+		},
+		{
+			"ParentName":"10000",
+			"ComponentName":"10500",
 			"Weight":1
 		},
 		{

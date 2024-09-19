@@ -1,0 +1,43 @@
+#region Prolog
+vAttributeExportFile = '';
+vDataExportFile      = '';
+IF ( pVersion = 11 & pOS @= 'WIN' );
+    ExecuteCommand( 'cmd /c mkdir "GIT"', 1);
+    ExecuteCommand( 'cmd /c mkdir "GIT\Attributes"', 1);
+    ExecuteCommand( 'cmd /c mkdir "GIT\Cubes"', 1);
+    vAttributeExportFile = '.\GIT\Attributes\';
+    vDataExportFile      = '.\GIT\Cubes\';
+ELSEIF ( pVersion = 11 & pOS @= 'LINUX' );
+    ExecuteCommand( 'mkdir "GIT"', 1);
+    ExecuteCommand( 'mkdir "GIT/Attributes"', 1);
+    ExecuteCommand( 'mkdir "GIT/Cubes"', 1);
+    vAttributeExportFile = './GIT/Attributes/';
+    vDataExportFile      = './GIT/Cubes/';
+ELSEIF ( pVersion = 12);
+    vAttributeExportFile = '/GIT/Attributes/';
+    vDataExportFile      = '/GIT/Cubes/';
+ELSE;
+    PROCESSQUIT;
+ENDIF;
+
+
+IF ( pAttributes @= 'Y' );
+    vFile = WildcardFileSearch ( vAttributeExportFile | '*', '' );
+    While( vFile @<> '');
+      ExecuteProcess( 'GIT Import Attributes', 'pFile', vFile, 'pDir', vAttributeExportFile );
+      vFile = WildcardFileSearch (  vAttributeExportFile | '*', vFile );
+    End;
+ENDIF;
+
+
+IF ( pData @= 'Y' );
+    vFile = WildcardFileSearch ( vDataExportFile | '/*', '' );
+    While( vFile @<> '');
+      ExecuteProcess( 'GIT Import Data', 'pFile', vFile, 'pDir', vDataExportFile );
+      vFile = WildcardFileSearch (  vDataExportFile | '/*', vFile );
+    End;
+ENDIF;
+
+
+
+#endregion

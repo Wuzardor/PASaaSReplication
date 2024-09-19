@@ -1,0 +1,69 @@
+#region Prolog
+vView = 'Export_View';
+vExportFile = '/' | pExportDir | '/' | pExportFile;
+vMDX = 'SELECT NON EMPTY ';
+
+vDimCount = CubeDimensionCountGet(pCube);
+vLastDim = TABDIM(pCube, vDimCount);
+
+vIndex = 1;
+vDim = TABDIM(pCube, vIndex);
+WHILE (vDim @<> vLastDim);
+    IF (HierarchyExists(vDim, 'Leaves') = 1);
+        vMDX = vMDX | '{\[' | vDim | '\].\[Leaves\].MEMBERS}';
+    ELSE;
+        vMDX = vMDX | '{TM1FILTERBYLEVEL(TM1SUBSETALL(\[' | vDim | '\].\[' | vDim | '\]), 0)}';
+    ENDIF;
+    IF (TABDIM(pCube, vIndex + 1) @<> vLastDim);
+        vMDX = vMDX | '*';
+    ENDIF;
+
+    vIndex = vIndex + 1;
+    vDim = TABDIM(pCube, vIndex);
+END;
+vMDX = vMDX | ' ON 0, NON EMPTY ';
+IF (HierarchyExists(vLastDim, 'Leaves') = 1);
+    vMDX = vMDX | '{\[' | vLastDim | '\].\[Leaves\].MEMBERS} ON 0, NON EMPTY ';
+ELSE;
+    vMDX = vMDX | '{TM1FILTERBYLEVEL(TM1SUBSETALL(\[' | vLastDim | '\].\[' | vLastDim | '\]), 0)} ON 1 ';
+ENDIF;
+
+vMDX = vMDX | ' FROM \[' | pCube | '\]';
+
+ASCIIOUTPUT('/Logs/test_mdx.txt', vMDX);
+ViewCreateByMDX(pCube, vView, vMDX, 1);
+
+DataSourceType='VIEW';
+DatasourceNameForServer=pCube;
+DatasourceCubeview=vView;
+
+ViewExtractSkipCalcsSet(pCube, vView, 1);
+ViewExtractSkipRuleValuesSet(pCube, vView, 1);
+#endregion
+#region Data
+SETOUTPUTCHARACTERSET(vExportFile, 'TM1CS_UTF8');
+
+IF (vDimCount = 2);
+    TEXTOUTPUT(vExportFile, v1, v2, v3);
+ELSEIF (vDimCount = 3);
+    TEXTOUTPUT(vExportFile, v1, v2, v3, v4);
+ELSEIF (vDimCount = 4);
+    TEXTOUTPUT(vExportFile, v1, v2, v3, v4, v5);
+ELSEIF (vDimCount = 5);
+    TEXTOUTPUT(vExportFile, v1, v2, v3, v4, v5, v6);
+ELSEIF (vDimCount = 6);
+    TEXTOUTPUT(vExportFile, v1, v2, v3, v4, v5, v6, v7);
+ELSEIF (vDimCount = 7);
+    TEXTOUTPUT(vExportFile, v1, v2, v3, v4, v5, v6, v7, v8);
+ELSEIF (vDimCount = 8);
+    TEXTOUTPUT(vExportFile, v1, v2, v3, v4, v5, v6, v7, v8, v9);
+ELSEIF (vDimCount = 9);
+    TEXTOUTPUT(vExportFile, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10);
+ELSEIF (vDimCount = 10);
+    TEXTOUTPUT(vExportFile, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11);
+ELSEIF (vDimCount = 11);
+    TEXTOUTPUT(vExportFile, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12);
+ELSEIF (vDimCount = 12);
+    TEXTOUTPUT(vExportFile, v1, v2, v3, v4, v5, v6, v7, v8, v9, v10, v11, v12, v13);
+ENDIF;
+#endregion

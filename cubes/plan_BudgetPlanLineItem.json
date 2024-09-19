@@ -33,7 +33,6 @@
 	},
 	"Views@Code.links":
 	[
-		"plan_BudgetPlanLineItem.views/Default.json",
 		"plan_BudgetPlanLineItem.views/Detail Budget Line Entry.json",
 		"plan_BudgetPlanLineItem.views/plan_line_item_input.json"
 	]
